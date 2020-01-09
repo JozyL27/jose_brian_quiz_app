@@ -34,16 +34,47 @@ const store = {
         correctAnswer: 'leicester city'
       },
       {
-        question: 'who won the 2015-2016 English Premiere League Title',
+        question: 'What player had the most goals in professional soccer history?',
         answers: [
-          'Manchester united',
-          'arsenal',
-          'leicester city',
-          'liverpool'
+          'Pele',
+          'Maradonna',
+          'Ronaldo',
+          'Josef Bican'
         ],
-        correctAnswer: 'leicester city'
+        correctAnswer: 'Josef Bican'
+      },
+      {
+        question: 'Which soccer star is married to Posh Spice?',
+        answers: [
+          'Cristiano Ronaldo',
+          'Zlatan Ibrahimovic',
+          'David Beckham',
+          'Manuel Neuer'
+        ],
+        correctAnswer: 'David Beckham'
       }
     ],
     questionNumber: 0,
     score: 0
   };
+
+
+  function addStartQuizButton(){
+      $('main').append('<button class="quizStart" type="button">Start Quiz</button>')
+  }
+
+  function generateQuestionForm(){
+      $('main').on('click', '.quizStart', function() {
+          $('main').html('<form>First name:<br><input type="text" name="firstname"><br>Last name:<br><input type="text" name="lastname"></form>')
+      })
+  }
+
+  function renderQuestionList(){}
+
+
+  function handleQuestionApp(){
+      addStartQuizButton()
+      generateQuestionForm()
+  }
+
+  $(handleQuestionApp)
