@@ -70,7 +70,7 @@ const store = {
 
   function generateQuestionForm(){
       $('main').on('click', '.quizStartButton', function() {
-          $('main').html('<form> <div> <input type="radio" name="gender value="Ronaldo"> Ronaldo <input type="radio" name="gender" value="female"> Female <input type="radio" name="gender" value="nonbinary"> Nonbinary <input type="radio" name="gender" value="other"> Other<input type="submit" value="submit"> </div> </form>')
+          $('main').html('<form> <div> <input type="radio" name="gender value="Ronaldo"> Ronaldo </div> <div> <input type="radio" name="gender" value="female"> Female </div> <div> <input type="radio" name="gender" value="nonbinary"> Nonbinary  </div> <div> <input type="radio" name="gender" value="other"> Other </div> <div> <input type="submit" value="submit"> </div> </form>')
       })
   }
 
