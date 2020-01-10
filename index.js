@@ -54,48 +54,50 @@ const store = {
         correctAnswer: 'David Beckham'
       }
     ],
+    startQuiz: false,
     questionNumber: 0,
     score: 0
   };
 
+// this adds a start quiz button to the begining of our quiz
+  function addStartQuizButton(){
+      return '<button class="quizStartButton" type="button">Start Quiz</button>'
+  }; 
 
-  function addStartQuiz(){
-      $('main').append('<button class="quizStartButton" type="button">Start Quiz</button>')
-      $('main').prepend(`<h1 class='head'> Soccer Quiz! </h1>`)
-  } 
+
+ // this generates the answer choices
+  function generateAnswerChoices(){
+      return `<form> <div> <input type="radio" name="soccer"
+       value="Ronaldo"> Ronaldo </div> <div> <input type="radio" name="soccer" value="female"> Female </div> 
+       <div> <input type="radio" name="soccer" value="nonbinary"> Nonbinary  </div>
+        <div> <input type="radio" name="soccer" value="other"> Other </div> 
+        <div> <input type="submit" value="submit"> </div> </form>`
+  };
 
 
-  function generateQuestionForm(){
-    $('main').on('click', '.quizStartButton', function() {
-      $('main').html('<form> <div> <input type="radio" name="gender value="Ronaldo"> Ronaldo </div> <div> <input type="radio" name="gender" value="female"> Female </div> <div> <input type="radio" name="gender" value="nonbinary"> Nonbinary  </div> <div> <input type="radio" name="gender" value="other"> Other </div> <div> <input type="submit" value="submit"> </div> </form>')
-  })
+  // this retrieves our question and adds it to our form
+  function addQuestionToForm(){}
+
+
+  function renderQuestion(){
+    let html = '';
+
+    if (store.startQuiz === false) {
+      $('main').html(addStartQuizButton())
+    } // else (store.startQuiz === true) {
+      // render a question
+    // }
   }
-
-  function getQuestion(){
-    let getQuest = store.questions.forEach(x => generateQuestionForm(x));
-  }
-
-
-
-  function renderQuestionList(){}
 
 
   function handleQuestionApp(){
-      addStartQuiz()
-      generateQuestionForm()
-      getQuestion()
+     renderQuestion()
+     addStartQuizButton()
+     generateAnswerChoices()
+     addQuestionToForm()
   }
 
   $(handleQuestionApp)
-
-
-
-
-
-
-
-
-
 
 
 
@@ -118,3 +120,12 @@ const store = {
 // 8) Users should be shown their overall score at the end of the quiz. In other words, how many questions they got right out of the total questions asked.
 
 // 9) Users should be able to start a new quiz.
+
+
+// generate html
+
+// answers array into  store.questions?
+
+// answers for each create a div 
+
+// template generation functions**
