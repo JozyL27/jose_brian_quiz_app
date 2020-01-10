@@ -64,15 +64,17 @@ const store = {
       $('main').prepend(`<h1 class='head'> Soccer Quiz! </h1>`)
   } 
 
-  function getQuestion(){
-      
-  }
 
   function generateQuestionForm(){
-      $('main').on('click', '.quizStartButton', function() {
-          $('main').html('<form> <div> <input type="radio" name="gender value="Ronaldo"> Ronaldo </div> <div> <input type="radio" name="gender" value="female"> Female </div> <div> <input type="radio" name="gender" value="nonbinary"> Nonbinary  </div> <div> <input type="radio" name="gender" value="other"> Other </div> <div> <input type="submit" value="submit"> </div> </form>')
-      })
+    $('main').on('click', '.quizStartButton', function() {
+      $('main').html('<form> <div> <input type="radio" name="gender value="Ronaldo"> Ronaldo </div> <div> <input type="radio" name="gender" value="female"> Female </div> <div> <input type="radio" name="gender" value="nonbinary"> Nonbinary  </div> <div> <input type="radio" name="gender" value="other"> Other </div> <div> <input type="submit" value="submit"> </div> </form>')
+  })
   }
+
+  function getQuestion(){
+    let getQuest = store.questions.forEach(x => generateQuestionForm(x));
+  }
+
 
 
   function renderQuestionList(){}
@@ -81,6 +83,7 @@ const store = {
   function handleQuestionApp(){
       addStartQuiz()
       generateQuestionForm()
+      getQuestion()
   }
 
   $(handleQuestionApp)
