@@ -59,21 +59,27 @@ const store = {
   };
 
 
-  function addStartQuizButton(){
-      $('main').append('<button class="quizStart" type="button">Start Quiz</button>')
+  function addStartQuiz(){
+      $('main').append('<button class="quizStartButton" type="button">Start Quiz</button>')
+      $('main').prepend(`<h1 class='head'> Soccer Quiz! </h1>`)
+  } 
+
+  function getQuestion(){
+      
   }
 
   function generateQuestionForm(){
-      $('main').on('click', '.quizStart', function() {
-          $('main').html('<form>First name:<br><input type="text" name="firstname"><br>Last name:<br><input type="text" name="lastname"></form>')
+      $('main').on('click', '.quizStartButton', function() {
+          $('main').html('<form><input type="radio" name="gender" value="male" checked> Male<br><input type="radio" name="gender" value="female"> Female<br><input type="radio" name="gender" value="nonbinary"> Nonbinary<br><input type="radio" name="gender" value="other"> Other</form>')
       })
   }
+
 
   function renderQuestionList(){}
 
 
   function handleQuestionApp(){
-      addStartQuizButton()
+      addStartQuiz()
       generateQuestionForm()
   }
 

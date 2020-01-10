@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+.head {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.quizStartButton {
+    display: block;
+    margin: 0 auto;
+}
