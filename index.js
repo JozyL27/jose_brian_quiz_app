@@ -55,7 +55,8 @@ const store = {
       }
     ],
     startQuiz: false,
-    questionNumber: 1,
+    questionNumber: 0,
+    possibleCorrect: 0,
     score: 0
   };
 
@@ -88,17 +89,29 @@ function handleSubmitButton(){
     event.preventDefault();
     const newObj= store.questions[store.questionNumber];
     let creditedResponse = newObj.correctAnswer;
-    console.log(creditedResponse)
     let userVal = $('input:checked').val();
 
     if(userVal === creditedResponse) {
-      $('main').html('<h1> CORRECT ANSWER! </h2>')
+      store.possibleCorrect++;
+      store.score++;
+      $('main').html(`<h2> YOU PICKED THE CORRECT ANSWER! </h2>
+      <h3>Your score: ${store.score} / ${store.possibleCorrect}</h3> <div> <input class="nextQuestion" type="button" value="Next Question"> </div>`)
+    } else if(userVal !== creditedResponse) {
+      store.possibleCorrect++;
+      $('main').html(`<h2> YOU PICKED THE WRONG ANSWER DUMBASS! </h2>
+      <h3>Your score: ${store.score} / ${store.possibleCorrect}</h3> <div> <input class="nextQuestion" type="button" value="Next Question"> </div>`)
     }
   })
-}
+};
 
-  // this retrieves our question and adds it to our form
-  function addQuestionToForm(){}
+
+
+function nextQuestionButton(){
+  $('main').on('click', '.nextQuestion', function(event){
+    store.questionNumber++;
+    render()
+  })
+}
 
 
   function render(){
@@ -112,13 +125,15 @@ function handleSubmitButton(){
   };
 
 
+
+
   function handleQuestionApp(){
      render()
      createQuizButton()
      generateQuestion()
-     addQuestionToForm()
      handleStartButtonClick()
      handleSubmitButton()
+     nextQuestionButton()
   }
 
   $(handleQuestionApp)
