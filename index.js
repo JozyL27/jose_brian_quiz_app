@@ -68,12 +68,16 @@ const store = {
  // this generates the answer choices
   function generateQuestion(){
     const newObj= store.questions[store.questionNumber]
-
+    if(store.questionNumber <= 4) {
       return `<form> <h2> ${newObj.question} </h2> <div> <input type="radio" name="soccer"
        value="${newObj.answers[0]}"> ${newObj.answers[0]} </div> <div> <input type="radio" name="soccer" value="${newObj.answers[3]}"> ${newObj.answers[3]} </div> 
        <div> <input type="radio" name="soccer" value="${newObj.answers[1]}"> ${newObj.answers[1]}  </div>
         <div> <input type="radio" name="soccer" value="${newObj.answers[2]}"> ${newObj.answers[2]} </div> 
         <div> <input class="subButton" type="submit" value="submit"> </div> </form>`
+      }  else if(store.questionNumber > 4){
+        return `<h2>Your score: ${store.score} / ${store.possibleCorrect}</h2>
+        <div> <input class="restartQuiz" type="button" value="Restart"> </div>`
+      }
   };
 
 function handleStartButtonClick(){
@@ -111,6 +115,14 @@ function nextQuestionButton(){
     store.questionNumber++;
     render()
   })
+};
+
+
+function restartQuizButton(){
+  $('main').on('click', '.restartQuiz', function(event){
+    store.startQuiz = false;
+    render()
+  })
 }
 
 
@@ -121,7 +133,7 @@ function nextQuestionButton(){
       $('main').html(createQuizButton())
      } else if(store.startQuiz === true) {
         $('main').html(generateQuestion())
-    }
+    } 
   };
 
 
@@ -134,6 +146,7 @@ function nextQuestionButton(){
      handleStartButtonClick()
      handleSubmitButton()
      nextQuestionButton()
+     restartQuizButton()
   }
 
   $(handleQuestionApp)
