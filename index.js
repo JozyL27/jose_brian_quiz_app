@@ -55,46 +55,70 @@ const store = {
       }
     ],
     startQuiz: false,
-    questionNumber: 0,
+    questionNumber: 1,
     score: 0
   };
 
 // this adds a start quiz button to the begining of our quiz
-  function addStartQuizButton(){
+  function createQuizButton(){
       return '<button class="quizStartButton" type="button">Start Quiz</button>'
   }; 
 
-
  // this generates the answer choices
-  function generateAnswerChoices(){
-      return `<form> <div> <input type="radio" name="soccer"
-       value="Ronaldo"> Ronaldo </div> <div> <input type="radio" name="soccer" value="female"> Female </div> 
-       <div> <input type="radio" name="soccer" value="nonbinary"> Nonbinary  </div>
-        <div> <input type="radio" name="soccer" value="other"> Other </div> 
-        <div> <input type="submit" value="submit"> </div> </form>`
+  function generateQuestion(){
+    const newObj= store.questions[store.questionNumber]
+
+      return `<form> <h2> ${newObj.question} </h2> <div> <input type="radio" name="soccer"
+       value="${newObj.answers[0]}"> ${newObj.answers[0]} </div> <div> <input type="radio" name="soccer" value="${newObj.answers[3]}"> ${newObj.answers[3]} </div> 
+       <div> <input type="radio" name="soccer" value="${newObj.answers[1]}"> ${newObj.answers[1]}  </div>
+        <div> <input type="radio" name="soccer" value="${newObj.answers[2]}"> ${newObj.answers[2]} </div> 
+        <div> <input class="subButton" type="submit" value="submit"> </div> </form>`
   };
 
+function handleStartButtonClick(){
+  $('main').on('click', '.quizStartButton', function(event) {
+    store.startQuiz = true;
+    render()
+  })
+}
+
+
+function handleSubmitButton(){
+  $('main').on('click', '.subButton', function(event){
+    event.preventDefault();
+    const newObj= store.questions[store.questionNumber];
+    let creditedResponse = newObj.correctAnswer;
+    console.log(creditedResponse)
+    let userVal = $('input:checked').val();
+
+    if(userVal === creditedResponse) {
+      $('main').html('<h1> CORRECT ANSWER! </h2>')
+    }
+  })
+}
 
   // this retrieves our question and adds it to our form
   function addQuestionToForm(){}
 
 
-  function renderQuestion(){
+  function render(){
     let html = '';
 
     if (store.startQuiz === false) {
-      $('main').html(addStartQuizButton())
-    } // else (store.startQuiz === true) {
-      // render a question
-    // }
-  }
+      $('main').html(createQuizButton())
+     } else if(store.startQuiz === true) {
+        $('main').html(generateQuestion())
+    }
+  };
 
 
   function handleQuestionApp(){
-     renderQuestion()
-     addStartQuizButton()
-     generateAnswerChoices()
+     render()
+     createQuizButton()
+     generateQuestion()
      addQuestionToForm()
+     handleStartButtonClick()
+     handleSubmitButton()
   }
 
   $(handleQuestionApp)
