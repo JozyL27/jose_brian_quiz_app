@@ -7,32 +7,32 @@ const store = {
     {
       question: 'Which of these soccer teams plays in the English Premiere League?',
       answers: [
-        'westham united',
-        'leeds united',
-        'nottingham forrest',
-        'london united'
+        'Westham United',
+        'Leeds United',
+        'Nottingham Forrest',
+        'London United'
       ],
-      correctAnswer: 'westham united'
+      correctAnswer: 'Westham United'
     },
     {
-      question: 'Who is the all-time leading scorer in the English Premiere League',
+      question: 'Who is the all-time leading scorer in the English Premiere League?',
       answers: [
-        'wayne rooney',
-        'alan shearer',
-        'robbie fowler',
-        'lionel messi'
+        'Wayne Rooney',
+        'Alan Shearer',
+        'Robbie Fowler',
+        'Lionel Messi'
       ],
-      correctAnswer: 'alan shearer'
+      correctAnswer: 'Alan Shearer'
     },
     {
-      question: 'who won the 2015-2016 English Premiere League Title',
+      question: 'who won the 2015-2016 English Premiere League Title?',
       answers: [
-        'Manchester united',
-        'arsenal',
-        'leicester city',
-        'liverpool'
+        'Manchester United',
+        'Arsenal',
+        'Leicester City',
+        'Liverpool'
       ],
-      correctAnswer: 'leicester city'
+      correctAnswer: 'Leicester City'
     },
     {
       question: 'What player had the most goals in professional soccer history?',
@@ -70,17 +70,17 @@ function createQuizButton(){
 function generateQuestion(){
   const newObj= store.questions[store.questionNumber];
   if(store.questionNumber <= 4) {
-    return `<form> <h2> ${newObj.question} </h2> <div> <input type="radio" name="soccer"
+    return `<div class="container"> <form> <h2> ${newObj.question} </h2> <div> <input type="radio" name="soccer"
        value="${newObj.answers[0]}" required> ${newObj.answers[0]} </div> <div> <input type="radio" name="soccer" value="${newObj.answers[3]}" required> ${newObj.answers[3]} </div> 
        <div> <input type="radio" name="soccer" value="${newObj.answers[1]}" required> ${newObj.answers[1]}  </div>
-        <div> <input type="radio" name="soccer" value="${newObj.answers[2]}" required> ${newObj.answers[2]} </div> 
+        <div> <input type="radio" name="soccer" value="${newObj.answers[2]}" required> ${newObj.answers[2]} </div> </div>
         <div> <input class="subButton" type="submit" value="submit"> </div></form>
         <p> Question ${store.questionNumber + 1} / 5 </p>`;
   }  else if(store.questionNumber > 4){
     return `<h2> You've reached the end of the quiz! </h2>
-    <h3> Your score: ${store.score} correct out of a possible ${store.possibleCorrect}! </h3>
+    <h3> Your score: ${store.score} correct out of ${store.possibleCorrect}! </h3>
     <h3> Press the Restart Button below to try again! </h3>
-        <div> <input class="restartQuiz" type="button" value="Restart"> </div>`
+        <div> <input class="restartQuiz" type="button" value="Restart"> </div>`;
   }
 }
 
@@ -102,25 +102,30 @@ function handleSubmitButton(){
     if(userVal === creditedResponse) {
       store.possibleCorrect++;
       store.score++;
-      $('main').html(`<h2> YOU PICKED THE CORRECT ANSWER! </h2>
-      <h3>Your score: ${store.score} / ${store.possibleCorrect}</h3> <div> <input class="nextQuestion" type="button" value="Next Question"> </div>`)
+      $('main').html(`<h2 style="color: green"> YOU PICKED THE CORRECT ANSWER! </h2>
+      <h3>Your score: ${store.score} / ${store.possibleCorrect}</h3> <div class="nextQuestion"> <input class="nextQuestionButton" type="button" value="Next Question"> </div>
+      <iframe src="https://giphy.com/embed/sRHVFZVZlHsOBwYTFn" width="480" height="255" frameBorder="0" class="giphy-embed" style="display: block; margin: 0 auto;" alt="Cristiano Ronaldo celebrates a goal!" allowFullScreen></iframe>
+      <p><a href="https://giphy.com/gifs/juventusfc-sRHVFZVZlHsOBwYTFn"></a></p>`);
     } else if(userVal !== creditedResponse) {
       store.possibleCorrect++;
-      $('main').html(`<h2> YOU PICKED THE WRONG ANSWER! </h2>
+      $('main').html(`<h2 style="color: red;"> YOU PICKED THE WRONG ANSWER! </h2>
       <h3> The correct answer is ${creditedResponse} </h3>
-      <h3>Your score: ${store.score} / ${store.possibleCorrect}</h3> <div> <input class="nextQuestion" type="button" value="Next Question"> </div>`)
+      <h3>Your score: ${store.score} / ${store.possibleCorrect}</h3> <div class="nextQuestion"> <input class="nextQuestionButton" type="button" value="Next Question"> </div>
+      <iframe src="https://giphy.com/embed/KDslQkrF0XqKbtjwJL" width="440" 
+      height="400" frameBorder="0" class="giphy-embed" style="display: block; margin: 0 auto;" alt="Mbappe mocks your failure!" allowFullScreen></iframe><p><a 
+      href="https://giphy.com/gifs/psg-inside-paris-psg-saint-germain-KDslQkrF0XqKbtjwJL"></a></p>`);
     }
-  })
-};
+  });
+}
 
 
 
 function nextQuestionButton(){
   $('main').on('click', '.nextQuestion', function(event){
     store.questionNumber++;
-    render()
-  })
-};
+    render();
+  });
+}
 
 
 function restartQuizButton(){
@@ -129,8 +134,8 @@ function restartQuizButton(){
     store.questionNumber = 0;
     store.score = 0;
     store.possibleCorrect = 0;
-    render()
-  })
+    render();
+  });
 }
 
 
@@ -138,26 +143,26 @@ function render(){
   let html = '';
 
   if (store.startQuiz === false) {
-    $('main').html(createQuizButton())
+    $('main').html(createQuizButton());
   } else if(store.startQuiz === true) {
-    $('main').html(generateQuestion())
+    $('main').html(generateQuestion());
   } 
-};
+}
 
 
 
 
 function handleQuestionApp(){
-  render()
-  createQuizButton()
-  generateQuestion()
-  handleStartButtonClick()
-  handleSubmitButton()
-  nextQuestionButton()
-  restartQuizButton()
+  render();
+  createQuizButton();
+  generateQuestion();
+  handleStartButtonClick();
+  handleSubmitButton();
+  nextQuestionButton();
+  restartQuizButton();
 }
 
-$(handleQuestionApp)
+$(handleQuestionApp);
 
 
 
