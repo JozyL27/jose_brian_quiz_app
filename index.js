@@ -1,90 +1,94 @@
+/* eslint-disable strict */
 
 
 const store = {
 
-    questions: [
-      {
-        question: 'Which of these soccer teams plays in the English Premiere League?',
-        answers: [
-          'westham united',
-          'leeds united',
-          'nottingham forrest',
-          'london united'
-        ],
-        correctAnswer: 'westham united'
-      },
-      {
-        question: 'Who is the all-time leading scorer in the English Premiere League',
-        answers: [
-          'wayne rooney',
-          'alan shearer',
-          'robbie fowler',
-          'lionel messi'
-        ],
-        correctAnswer: 'alan shearer'
-      },
-      {
-        question: 'who won the 2015-2016 English Premiere League Title',
-        answers: [
-          'Manchester united',
-          'arsenal',
-          'leicester city',
-          'liverpool'
-        ],
-        correctAnswer: 'leicester city'
-      },
-      {
-        question: 'What player had the most goals in professional soccer history?',
-        answers: [
-          'Pele',
-          'Maradonna',
-          'Ronaldo',
-          'Josef Bican'
-        ],
-        correctAnswer: 'Josef Bican'
-      },
-      {
-        question: 'Which soccer star is married to Posh Spice?',
-        answers: [
-          'Cristiano Ronaldo',
-          'Zlatan Ibrahimovic',
-          'David Beckham',
-          'Manuel Neuer'
-        ],
-        correctAnswer: 'David Beckham'
-      }
-    ],
-    startQuiz: false,
-    questionNumber: 0,
-    possibleCorrect: 0,
-    score: 0
-  };
+  questions: [
+    {
+      question: 'Which of these soccer teams plays in the English Premiere League?',
+      answers: [
+        'westham united',
+        'leeds united',
+        'nottingham forrest',
+        'london united'
+      ],
+      correctAnswer: 'westham united'
+    },
+    {
+      question: 'Who is the all-time leading scorer in the English Premiere League',
+      answers: [
+        'wayne rooney',
+        'alan shearer',
+        'robbie fowler',
+        'lionel messi'
+      ],
+      correctAnswer: 'alan shearer'
+    },
+    {
+      question: 'who won the 2015-2016 English Premiere League Title',
+      answers: [
+        'Manchester united',
+        'arsenal',
+        'leicester city',
+        'liverpool'
+      ],
+      correctAnswer: 'leicester city'
+    },
+    {
+      question: 'What player had the most goals in professional soccer history?',
+      answers: [
+        'Pele',
+        'Maradonna',
+        'Ronaldo',
+        'Josef Bican'
+      ],
+      correctAnswer: 'Josef Bican'
+    },
+    {
+      question: 'Which soccer star is married to Posh Spice?',
+      answers: [
+        'Cristiano Ronaldo',
+        'Zlatan Ibrahimovic',
+        'David Beckham',
+        'Manuel Neuer'
+      ],
+      correctAnswer: 'David Beckham'
+    }
+  ],
+  startQuiz: false,
+  questionNumber: 0,
+  possibleCorrect: 0,
+  score: 0
+};
 
 // this adds a start quiz button to the begining of our quiz
-  function createQuizButton(){
-      return '<button class="quizStartButton" type="button">Start Quiz</button>'
-  }; 
+function createQuizButton(){
+  return '<button class="quizStartButton" type="button">Start Quiz</button>';
+} 
 
- // this generates the answer choices
-  function generateQuestion(){
-    const newObj= store.questions[store.questionNumber]
-    if(store.questionNumber <= 4) {
-      return `<form> <h2> ${newObj.question} </h2> <div> <input type="radio" name="soccer"
-       value="${newObj.answers[0]}"> ${newObj.answers[0]} </div> <div> <input type="radio" name="soccer" value="${newObj.answers[3]}"> ${newObj.answers[3]} </div> 
-       <div> <input type="radio" name="soccer" value="${newObj.answers[1]}"> ${newObj.answers[1]}  </div>
-        <div> <input type="radio" name="soccer" value="${newObj.answers[2]}"> ${newObj.answers[2]} </div> 
-        <div> <input class="subButton" type="submit" value="submit"> </div> </form>`
-      }  else if(store.questionNumber > 4){
-        return `<h2>Your score: ${store.score} / ${store.possibleCorrect}</h2>
+// this generates the answer choices
+function generateQuestion(){
+  const newObj= store.questions[store.questionNumber];
+  if(store.questionNumber <= 4) {
+    return `<form> <h2> ${newObj.question} </h2> <div> <input type="radio" name="soccer"
+       value="${newObj.answers[0]}" required> ${newObj.answers[0]} </div> <div> <input type="radio" name="soccer" value="${newObj.answers[3]}" required> ${newObj.answers[3]} </div> 
+       <div> <input type="radio" name="soccer" value="${newObj.answers[1]}" required> ${newObj.answers[1]}  </div>
+        <div> <input type="radio" name="soccer" value="${newObj.answers[2]}" required> ${newObj.answers[2]} </div> 
+        <div> <input class="subButton" type="submit" value="submit"> </div></form>
+        <p> Question ${store.questionNumber + 1} / 5 </p>`;
+  }  else if(store.questionNumber > 4){
+    return `<h2> You've reached the end of the quiz! </h2>
+    <h3> Your score: ${store.score} correct out of a possible ${store.possibleCorrect}! </h3>
+    <h3> Press the Restart Button below to try again! </h3>
         <div> <input class="restartQuiz" type="button" value="Restart"> </div>`
-      }
-  };
+  }
+}
 
 function handleStartButtonClick(){
   $('main').on('click', '.quizStartButton', function(event) {
     store.startQuiz = true;
-    render()
-  })
+    render();
+  });
 }
 
 
@@ -102,7 +106,8 @@ function handleSubmitButton(){
       <h3>Your score: ${store.score} / ${store.possibleCorrect}</h3> <div> <input class="nextQuestion" type="button" value="Next Question"> </div>`)
     } else if(userVal !== creditedResponse) {
       store.possibleCorrect++;
-      $('main').html(`<h2> YOU PICKED THE WRONG ANSWER DUMBASS! </h2>
+      $('main').html(`<h2> YOU PICKED THE WRONG ANSWER! </h2>
+      <h3> The correct answer is ${creditedResponse} </h3>
       <h3>Your score: ${store.score} / ${store.possibleCorrect}</h3> <div> <input class="nextQuestion" type="button" value="Next Question"> </div>`)
     }
   })
@@ -121,35 +126,38 @@ function nextQuestionButton(){
 function restartQuizButton(){
   $('main').on('click', '.restartQuiz', function(event){
     store.startQuiz = false;
+    store.questionNumber = 0;
+    store.score = 0;
+    store.possibleCorrect = 0;
     render()
   })
 }
 
 
-  function render(){
-    let html = '';
+function render(){
+  let html = '';
 
-    if (store.startQuiz === false) {
-      $('main').html(createQuizButton())
-     } else if(store.startQuiz === true) {
-        $('main').html(generateQuestion())
-    } 
-  };
-
-
+  if (store.startQuiz === false) {
+    $('main').html(createQuizButton())
+  } else if(store.startQuiz === true) {
+    $('main').html(generateQuestion())
+  } 
+};
 
 
-  function handleQuestionApp(){
-     render()
-     createQuizButton()
-     generateQuestion()
-     handleStartButtonClick()
-     handleSubmitButton()
-     nextQuestionButton()
-     restartQuizButton()
-  }
 
-  $(handleQuestionApp)
+
+function handleQuestionApp(){
+  render()
+  createQuizButton()
+  generateQuestion()
+  handleStartButtonClick()
+  handleSubmitButton()
+  nextQuestionButton()
+  restartQuizButton()
+}
+
+$(handleQuestionApp)
 
 
 
