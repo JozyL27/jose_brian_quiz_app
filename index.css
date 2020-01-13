@@ -88,6 +88,11 @@ p {
     h3 {
         font-size: 20px
     }
+
+    .giphy-embed {
+        height: 200px;
+        width: 250px;
+    }
 }
 
 
