@@ -78,9 +78,11 @@ function generateQuestion(){
         <p> Question ${store.questionNumber + 1} / 5 </p>`;
   }  else if(store.questionNumber > 4){
     return `<h2> You've reached the end of the quiz! </h2>
-    <h3> Your score: ${store.score} correct out of ${store.possibleCorrect}! </h3>
+    <h3 style="color: blue;"> Your score: ${store.score} correct out of ${store.possibleCorrect}! </h3>
     <h3> Press the Restart Button below to try again! </h3>
-        <div> <input class="restartQuiz" type="button" value="Restart"> </div>`;
+        <div class="resButton"> <input class="restartQuiz" type="button" value="Restart"> </div>
+        <iframe src="https://giphy.com/embed/T2AmoAqrjAluU" width="480" height="270" frameBorder="0" class="giphy-embed" style="display: block; margin: 0 auto;" allowFullScreen>
+        </iframe><p><a href="https://giphy.com/gifs/sporzaredactie-T2AmoAqrjAluU"></a></p>`;
   }
 }
 

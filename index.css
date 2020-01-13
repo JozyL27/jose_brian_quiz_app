@@ -54,6 +54,7 @@ h3 {
     border: 1px solid lightslategray;
     border-radius: 4px;
     margin-top: 10px;
+    padding: 5px;
 }
 
 form {
@@ -65,6 +66,11 @@ form {
 p {
     text-align: center;
     margin-top: 20px;
+}
+
+.resButton {
+    text-align: center;
+    margin: 12px 0px 12px 0px;
 }
 
 
@@ -81,5 +87,32 @@ p {
 
     h3 {
         font-size: 20px
+    }
+}
+
+
+@media screen and (min-width: 600px) {
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    h3 {
+        font-size: 30px
+    }
+
+    .subButton {
+        height: 25px;
+    }
+
+    .nextQuestionButton {
+        height: 25px;
+    }
+
+    .restartQuiz {
+        height: 25px;
     }
 }
