@@ -70,7 +70,7 @@ function createQuizButton(){
 function generateQuestion(){
   const newObj= store.questions[store.questionNumber];
   if(store.questionNumber <= 4) {
-    return `<div class="container"> <form> <h2> ${newObj.question} </h2> <div> <input type="radio" name="soccer"
+    return `<div class="container" role="Soccer quiz"> <form> <h2> ${newObj.question} </h2> <div> <input type="radio" name="soccer"
        value="${newObj.answers[0]}" required> ${newObj.answers[0]} </div> <div> <input type="radio" name="soccer" value="${newObj.answers[3]}" required> ${newObj.answers[3]} </div> 
        <div> <input type="radio" name="soccer" value="${newObj.answers[1]}" required> ${newObj.answers[1]}  </div>
         <div> <input type="radio" name="soccer" value="${newObj.answers[2]}" required> ${newObj.answers[2]} </div> </div>
@@ -81,7 +81,7 @@ function generateQuestion(){
     <h3 style="color: blue;"> Your score: ${store.score} points out of 100! </h3>
     <h3> Press the Restart Button below to try again! </h3>
         <div class="resButton"> <input class="restartQuiz" type="button" value="Restart"> </div>
-        <iframe src="https://giphy.com/embed/T2AmoAqrjAluU" width="480" height="270" frameBorder="0" class="giphy-embed" style="display: block; margin: 0 auto;" allowFullScreen>
+        <iframe src="https://giphy.com/embed/T2AmoAqrjAluU" width="480" height="270" frameBorder="0" class="giphy-embed" style="display: block; margin: 0 auto;" alt="Paul Pogba dabbing!" allowFullScreen>
         </iframe><p><a href="https://giphy.com/gifs/sporzaredactie-T2AmoAqrjAluU"></a></p>`;
   }
 }
